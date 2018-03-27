@@ -7,16 +7,25 @@ class HashMap:
     """
 
     def __init__(self, map_size):
-        self.hash_map = self.create_map(map_size)
+        self.hash_map = self.create_initial_map(map_size)
 
-    def create_map(self, map_size):
+    def create_intial_map(self, map_size):
         map = []
         for i in range(map_size):
             map.append(None)
         return map
 
-    def hash_key(self, key):
-        pass
+    def hash_function(self, key):
+        ascii_sum = 0
+
+        for item in key:
+            if type(item) == int:
+                ascii_sum += chr(item)
+            else:
+                ascii_sum += ord(item)
+
+        remainder = ascii_sum % len(self.hash_map)
+        return remainder
 
     def insert(self, item):
         # Hashes a key and places key/value in index in map
