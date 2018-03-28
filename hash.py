@@ -6,10 +6,11 @@ class HashMap:
     method, lookup method
     """
 
-    def __init__(self, map_size=15):
+    def __init__(self, map_size=17):
         self.hash_map = self.create_initial_map(map_size)
+        self.map_size = len(self.hash_map)
 
-    def create_intial_map(self, map_size):
+    def create_initial_map(self, map_size):
         map = []
         for i in range(map_size):
             map.append(None)
@@ -18,18 +19,28 @@ class HashMap:
     def hash_function(self, key):
         ascii_sum = 0
 
-        for item in key:
+        for item in str(key):
             if type(item) == int:
                 ascii_sum += chr(item)
             else:
                 ascii_sum += ord(item)
 
-        remainder = ascii_sum % len(self.hash_map)
-        return remainder
+        return ascii_sum
+
+    def get_index(self, key):
+        return self.hash_function(key) % self.map_size
 
     def insert(self, key, value):
-        # Hashes a key (hash_function) and places key/value in index in map
-        pass
+        index = self.get_index(key)
+        current_value = self.hash_map[index]
+
+        if current_value is not None:
+            if isinstance(current_value, list):
+                self.hash_map[index].append((key, value))
+            else:
+                self.hash_map[index] = [current_value, (key, value)]
+        else:
+            self.hash_map[index] = (key, value)
 
     def remove(self, key):
         pass
