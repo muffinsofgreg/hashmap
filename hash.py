@@ -50,7 +50,20 @@ class HashMap:
         pass
 
     def __str__(self):
-        return "Hashmap with {} buckets.".format(len(self.hash_map))
+
+        def print_bucket_summary():
+            return "Hashmap with {} buckets.\n\n".format(len(self.hash_map))
+
+        def print_map():
+            string = ""
+            for i in range(len(self.hash_map)):
+                string += "{0} | {1}\n".format(i, self.hash_map[i])
+            return string
+
+        return print_bucket_summary() + print_map()
+
+    def __repr__(self):
+        return str(self.hash_map)
 
     def __len__(self):
         return len(self.hash_map)
