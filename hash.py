@@ -6,7 +6,7 @@ class HashMap:
     method, lookup method
     """
 
-    def __init__(self, map_size):
+    def __init__(self, map_size=15):
         self.hash_map = self.create_initial_map(map_size)
 
     def create_intial_map(self, map_size):
@@ -27,14 +27,14 @@ class HashMap:
         remainder = ascii_sum % len(self.hash_map)
         return remainder
 
-    def insert(self, item):
-        # Hashes a key and places key/value in index in map
+    def insert(self, key, value):
+        # Hashes a key (hash_function) and places key/value in index in map
         pass
 
-    def remove(self, item):
+    def remove(self, key):
         pass
 
-    def lookup(self, hashtable, key):
+    def lookup(self, key):
         # Give a hashed list, lookup based on a given
         pass
 
