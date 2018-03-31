@@ -2,33 +2,45 @@
 
 
 class HashMap:
-    """Hash map inits with a map of a given size (m), map method, remove from map
-    method, lookup method
+    """
+    Hash map inits with a list of a given size (m);
+    Keywords: map_size (default = 17)
     """
 
     def __init__(self, map_size=17):
-        self.hash_map = self.create_initial_map(map_size)
+        self.hash_map = self.create_map(map_size)
         self.map_size = len(self.hash_map)
 
-    def create_initial_map(self, map_size):
+    def create_map(self, map_size):
         map = []
         for i in range(map_size):
             map.append(None)
         return map
 
-    def hash_function(self, key):
+    def hash(self, key):
+        """
+        For a given key, hashes the key into an int value
+        Keywords: key
+        returns: int
+        """
         ascii_sum = 0
 
-        for item in str(key):
-            if type(item) == int:
-                ascii_sum += chr(item)
-            else:
+        if type(key) == int:
+            ascii_sum += ord(chr(key))
+        else:
+            for item in key:
                 ascii_sum += ord(item)
 
         return ascii_sum
 
     def get_index(self, key):
-        return self.hash_function(key) % self.map_size
+        """
+        For a given key, invokes hash() and returns an index value n-1
+        where n is the size of the Hash Map
+        keywords: key
+        returns: int
+        """
+        return self.hash(key) % self.map_size
 
     def insert(self, key, value):
         index = self.get_index(key)
@@ -62,8 +74,8 @@ class HashMap:
         pass
 
     def lookup(self, key):
-        key_index = self.get_index(key)
-        lookup_value = self.hash_map[key_index]
+        index = self.get_index(key)
+        lookup_value = self.hash_map[index]
 
         if lookup_value is None:
             raise KeyError('{}'.format(key))
@@ -82,7 +94,7 @@ class HashMap:
     def __str__(self):
 
         def print_bucket_summary():
-            return "Hashmap with {} buckets.\n\n".format(len(self.hash_map))
+            return "Hash Map with {} buckets.\n\n".format(len(self.hash_map))
 
         def print_map():
             string = ""
