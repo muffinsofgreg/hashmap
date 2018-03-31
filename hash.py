@@ -49,11 +49,11 @@ class HashMap:
 
             else:
                 if current_value[0] == key:
-                    if current_value[1] == value: # If keys and value are the same, break
+                    if current_value[1] == value:  # If keys and value are the same, break
                         pass
-                    else: # if just keys are the same, update value to new value
+                    else:  # if just keys are the same, update value to new value
                         self.hash_map[index] = (key, value)
-                else: # turn tuple into a list of tuples
+                else:  # turn tuple into a list of tuples
                     self.hash_map[index] = [current_value, (key, value)]
         else:
             self.hash_map[index] = (key, value)
