@@ -36,9 +36,25 @@ class HashMap:
 
         if current_value is not None:
             if isinstance(current_value, list):
-                self.hash_map[index].append((key, value))
+                for i in range(len(current_value)):
+                    if current_value[i][0] == key and current_value[i][1] == value:
+                        break
+                    elif current_value[i][0] == key:
+                        self.hash_map[index][i] = (key, value)
+                        break
+                    else:
+                        pass
+                else:
+                    self.hash_map[index].append((key, value))
+
             else:
-                self.hash_map[index] = [current_value, (key, value)]
+                if current_value[0] == key:
+                    if current_value[1] == value: # If keys and value are the same, break
+                        pass
+                    else: # if just keys are the same, update value to new value
+                        self.hash_map[index] = (key, value)
+                else: # turn tuple into a list of tuples
+                    self.hash_map[index] = [current_value, (key, value)]
         else:
             self.hash_map[index] = (key, value)
 
@@ -46,7 +62,6 @@ class HashMap:
         pass
 
     def lookup(self, key):
-        # Give a hashed list, lookup based on a given
         key_index = self.get_index(key)
         lookup_value = self.hash_map[key_index]
 
