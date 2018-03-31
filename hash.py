@@ -56,6 +56,8 @@ class HashMap:
             for each in lookup_value:
                 if each[0] == key:
                     return each[1]
+            else:
+                raise KeyError('{}'.format(key))
         else:
             if key == lookup_value[0]:
                 return lookup_value[1]
