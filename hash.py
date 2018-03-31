@@ -47,7 +47,20 @@ class HashMap:
 
     def lookup(self, key):
         # Give a hashed list, lookup based on a given
-        pass
+        key_index = self.get_index(key)
+        lookup_value = self.hash_map[key_index]
+
+        if lookup_value is None:
+            raise KeyError('{}'.format(key))
+        elif isinstance(lookup_value, list):
+            for each in lookup_value:
+                if each[0] == key:
+                    return each[1]
+        else:
+            if key == lookup_value[0]:
+                return lookup_value[1]
+            else:
+                raise KeyError('{}'.format(key))
 
     def __str__(self):
 
