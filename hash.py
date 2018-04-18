@@ -94,7 +94,7 @@ class HashMap:
     def __str__(self):
 
         def print_bucket_summary():
-            return "Hash Map with {} buckets.\n\n".format(len(self.hash_map))
+            return "Hashmap with {} buckets.\n\n".format(len(self.hash_map))
 
         def print_map():
             string = ""
