@@ -81,7 +81,7 @@ class HashMap:
             for i in range(len(delete_value)):
                 if delete_value[i][0] == key:
                     del(self.hash_map[index[i]])
-        else:
+        else:  # if tuple
             if self.hash_map[index][0] == key:
                 self.hash_map[index] = None
 
