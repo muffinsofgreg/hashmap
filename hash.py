@@ -30,7 +30,6 @@ class HashMap:
         else:
             for item in key:
                 ascii_sum += ord(item)
-
         return ascii_sum
 
     def get_index(self, key):
@@ -80,14 +79,19 @@ class HashMap:
             raise KeyError('No key: {}'.format(key))
         elif isinstance(delete_value, list):
             for i in range(len(delete_value)):
-                print(delete_value[i][0])
                 if delete_value[i][0] == key:
                     del(self.hash_map[index][i])
+                    break
             else:
                 raise KeyError('No key: {}'.format(key))
         else:  # if tuple
             if self.hash_map[index][0] == key:
                 self.hash_map[index] = None
+            else:
+                raise KeyError('No key: {}'.format(key))
+
+        if not delete_value:
+            self.hash_map[index] = None
 
     def lookup(self, key):
         index = self.get_index(key)
