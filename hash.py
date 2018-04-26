@@ -46,30 +46,31 @@ class HashMap:
         index = self.get_index(key)
         current_value = self.hash_map[index]
 
-        if current_value is not None:
-            if isinstance(current_value, list):  # if current value already exists as a list
-                for i in range(len(current_value)):
-                    # if (key, value) already exist, pass
-                    if current_value[i][0] == key and current_value[i][1] == value:
-                        break
-                    elif current_value[i][0] == key:  # if key already exists, but new value, update (key, value)
-                        self.hash_map[index][i] = (key, value)
-                        break
-                    else:
-                        pass
-                else:  # else, append list with new (key, value)
-                    self.hash_map[index].append((key, value))
-
-            else:
-                if current_value[0] == key:  # if not list, but current value, then must be single tuple
-                    if current_value[1] == value:  # If keys and value are the same, break
-                        pass
-                    else:  # if just keys are the same, update value to new value
-                        self.hash_map[index] = (key, value)
-                else:  # turn tuple into a list of tuples
-                    self.hash_map[index] = [current_value, (key, value)]
-        else:  # finally, if no current_value, create (key, value) tuple
+        if current_value is None:
             self.hash_map[index] = (key, value)
+
+        elif isinstance(current_value, tuple):
+            if current_value[0] == key:  # if not list, but current value, then must be single tuple
+                if current_value[1] == value:  # If keys and value are the same, break
+                    pass
+                else:  # if just keys are the same, update value to new value
+                    self.hash_map[index] = (key, value)
+            else:  # turn tuple into a list of tuples
+                self.hash_map[index] = [current_value, (key, value)]
+
+        else:  # if current value already exists as a list
+            for i in range(len(current_value)):
+                # if (key, value) already exist, pass
+                if current_value[i][0] == key and current_value[i][1] == value:
+                    break
+                elif current_value[i][0] == key:  # if key already exists, but new value, update (key, value)
+                    self.hash_map[index][i] = (key, value)
+                    break
+                else:
+                    pass
+            else:  # else, append list with new (key, value)
+                self.hash_map[index].append((key, value))
+
 
     def remove(self, key):
         index = self.get_index(key)
@@ -79,8 +80,11 @@ class HashMap:
             raise KeyError('No key: {}'.format(key))
         elif isinstance(delete_value, list):
             for i in range(len(delete_value)):
+                print(delete_value[i][0])
                 if delete_value[i][0] == key:
-                    del(self.hash_map[index[i]])
+                    del(self.hash_map[index][i])
+            else:
+                raise KeyError('No key: {}'.format(key))
         else:  # if tuple
             if self.hash_map[index][0] == key:
                 self.hash_map[index] = None
