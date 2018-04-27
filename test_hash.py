@@ -1,21 +1,23 @@
 from hash import HashMap
+import unittest
 
 WORDLIST_FILENAME = "words.txt"
 
-def loadWords():
+def loadWords(numWords):
     """
     Returns a list of valid words, strings of lowercase letters.
     """
     print("Loading word list from file...")
     inFile = open(WORDLIST_FILENAME, 'r')
+    counter = 0
     wordList = []
-    for line in inFile:
-        wordList.append(line.strip().lower())
+    while counter < numWords:
+        for line in inFile:
+            wordList.append(line.strip().lower())
+            counter += 1
+            break
     print(" ", len(wordList), "words loaded.")
     return wordList
-
-print('Testing HashMap class')
-
 
 def test_map_creation(num):
     print('Test Map creation...', end="")
@@ -27,20 +29,16 @@ def test_map_creation(num):
     except:
         print('Failure')
 
-
-# alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-#            't', 'u', 'v', 'w', 'x', 'y', 'z']
-
 def test_insert(map, wordList):
     print('Test Map insertions "a" to "z"...', end="")
 
     try:
         for word in wordList:
-            a.insert(word, word)
+            map.insert(word, word)
         print('Success')
-        print(a)
-    except:
-        print('Failure')
+        print(map)
+    except Exception as err:
+        print('Failure: {}'.format(err))
 
 
 def test_lookup(map, wordList):
@@ -49,11 +47,11 @@ def test_lookup(map, wordList):
 
     try:
         for word in wordList:
-            a.lookup(word)
+            map.lookup(word)
         print('Success')
-        print(a)
-    except:
-        print('Failure')
+        print(map)
+    except Exception as err:
+        print('Failure: {}'.format(err))
 
 def test_remove(map, wordList):
 
@@ -61,11 +59,11 @@ def test_remove(map, wordList):
 
     try:
         for word in wordList:
-            a.remove(word)
+            map.remove(word)
         print('Success')
-        print(a)
-    except:
-        print('Failure')
+        print(map)
+    except Exception as err:
+        print('Failure: {}'.format(err))
 
 def test_empty(map):
     print('Map should be empty...', end="")
@@ -75,16 +73,28 @@ def test_empty(map):
                 raise MapFailure('Failure')
         else:
             print('Success')
-            print(a)
+            print(map)
+    except Exception as err:
+        print('Failure: {}'.format(err))
+
+
+
+while True:
+    try:
+        numBuckets = int(input('How many buckets to fill hash map?: '))
+        numWords = int(input('How many words to load from wordList?: '))
+
+        break
     except:
-        print("Failure")
+        print("Please enter a valid integer.")
 
+wordList = loadWords(numWords)
 
-wordList = loadWords()
-inputs = int(input('How many buckets to fill hash map?: '))
+def checkForErrors(wordList):
+    print("Testing HashMap class")
+    a = test_map_creation(numBuckets)
+    test_insert(a, wordList)
+    test_lookup(a, wordList)
+    test_remove(a, wordList)
 
-a = test_map_creation(inputs)
-
-test_insert(a, wordList)
-test_lookup(a, wordList)
-test_remove(a, wordList)
+checkForErrors(wordList)
