@@ -17,11 +17,27 @@ def loadWords(numWords):
             counter += 1
             break
     print(" ", len(wordList), "words loaded.")
+    inFile.close()
     return wordList
 
-def test_map_creation(num):
-    print('Test Map creation...', end="")
+def checkMapSize(map):
+    try:
+        counter = 0
+        for line in map:
+            if isinstance(line, list):
+                for item in line:
+                    counter += 1
+            elif isinstance(line, tuple):
+                counter += 1
+            else:
+                counter += 1
+        return counter
+    except Exception as err:
+        print("Failure, {}".format(err))
 
+
+def testMapCreation(num):
+    print('Test Map creation...', end="")
     try:
         a = HashMap(num)
         print('Success')
@@ -29,19 +45,17 @@ def test_map_creation(num):
     except:
         print('Failure')
 
-def test_insert(map, wordList):
-    print('Test Map insertions "a" to "z"...', end="")
-
+def testInsert(map, wordList):
+    print('Test Map insertions from wordList...', end="")
     try:
         for word in wordList:
             map.insert(word, word)
         print('Success')
-        print(map)
+
     except Exception as err:
         print('Failure: {}'.format(err))
 
-
-def test_lookup(map, wordList):
+def testLookup(map, wordList):
 
     print('Test Map lookups "a" to "z"...', end="")
 
@@ -53,7 +67,7 @@ def test_lookup(map, wordList):
     except Exception as err:
         print('Failure: {}'.format(err))
 
-def test_remove(map, wordList):
+def testRemove(map, wordList):
 
     print('Test Map removals "a" to "z"...', end="")
 
@@ -65,7 +79,7 @@ def test_remove(map, wordList):
     except Exception as err:
         print('Failure: {}'.format(err))
 
-def test_empty(map):
+def testEmpty(map):
     print('Map should be empty...', end="")
     try:
         for item in map:
@@ -90,11 +104,12 @@ while True:
 
 wordList = loadWords(numWords)
 
-def checkForErrors(wordList):
+def checkForErrors():
     print("Testing HashMap class")
-    a = test_map_creation(numBuckets)
-    test_insert(a, wordList)
-    test_lookup(a, wordList)
-    test_remove(a, wordList)
+    a = testMapCreation(numBuckets)
+    testInsert(a, wordList)
+    testLookup(a, wordList)
+    testRemove(a, wordList)
 
-checkForErrors(wordList)
+if __name__ == "__main__":
+    checkForErrors()
