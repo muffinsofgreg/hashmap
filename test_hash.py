@@ -55,6 +55,13 @@ def testInsert(map, wordList):
     except Exception as err:
         print('Failure: {}'.format(err))
 
+    print("Test map size after insertions...", end="")
+    try:
+        if checkMapSize(map) == len(wordList):
+            print("Success")
+    except Exception as err:
+        print("Failure, {}".format(err))
+
 def testLookup(map, wordList):
 
     print('Test Map lookups "a" to "z"...', end="")
@@ -63,7 +70,6 @@ def testLookup(map, wordList):
         for word in wordList:
             map.lookup(word)
         print('Success')
-        print(map)
     except Exception as err:
         print('Failure: {}'.format(err))
 
@@ -75,7 +81,6 @@ def testRemove(map, wordList):
         for word in wordList:
             map.remove(word)
         print('Success')
-        print(map)
     except Exception as err:
         print('Failure: {}'.format(err))
 
@@ -84,20 +89,24 @@ def testEmpty(map):
     try:
         for item in map:
             if item is not None:
-                raise MapFailure('Failure')
+                print("Failure, map is not empty")
+                break
         else:
-            print('Success')
-            print(map)
+            print("Success")
     except Exception as err:
         print('Failure: {}'.format(err))
 
-
+    print("Test map size after deletions...", end="")
+    try:
+        if checkMapSize(map) == numBuckets:
+            print("Success")
+    except Exception as err:
+        print("Failure: {}".format(err))
 
 while True:
     try:
         numBuckets = int(input('How many buckets to fill hash map?: '))
         numWords = int(input('How many words to load from wordList?: '))
-
         break
     except:
         print("Please enter a valid integer.")
@@ -110,6 +119,7 @@ def checkForErrors():
     testInsert(a, wordList)
     testLookup(a, wordList)
     testRemove(a, wordList)
+    testEmpty(a)
 
 if __name__ == "__main__":
     checkForErrors()
