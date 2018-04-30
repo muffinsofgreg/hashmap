@@ -42,6 +42,12 @@ class HashMap:
         return self.hash(key) % self.map_size
 
     def insert(self, key, value):
+        """
+        For given (key, value), inserts (key, value) tuple into map.
+        If no item exists, (key, value) replaces None
+        If a collision occurs, creates list of tuples and appends list as needed
+        returns: None
+        """
         index = self.get_index(key)
         current_value = self.hash_map[index]
 
