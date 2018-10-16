@@ -8,10 +8,15 @@ class HashMap:
     """
 
     def __init__(self, map_size=17):
+        self.map_size = map_size
         self.hash_map = self.create_map(map_size)
-        self.map_size = len(self.hash_map)
 
     def create_map(self, map_size):
+        """
+        Creates list "map" of given map_size
+        arguments: map_size
+        returns: list
+        """
         map = []
         for i in range(map_size):
             map.append(None)
@@ -75,7 +80,6 @@ class HashMap:
                     pass
             else:  # else, append list with new (key, value)
                 self.hash_map[index].append((key, value))
-
 
     def remove(self, key):
         index = self.get_index(key)
