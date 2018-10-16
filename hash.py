@@ -50,7 +50,8 @@ class HashMap:
         """
         For given (key, value), inserts (key, value) tuple into map.
         If no item exists, (key, value) replaces None
-        If a collision occurs, creates list of tuples and appends list as needed
+        If a collision occurs, creates list of tuples and appends list
+        as needed
         returns: None
         """
         index = self.get_index(key)
@@ -60,8 +61,10 @@ class HashMap:
             self.hash_map[index] = (key, value)
 
         elif isinstance(current_value, tuple):
-            if current_value[0] == key:  # if not list, but current value, then must be single tuple
-                if current_value[1] == value:  # If keys and value are the same, break
+            # if not list, but current value, then must be single tuple
+            if current_value[0] == key:
+                # If keys and value are the same, break
+                if current_value[1] == value:
                     pass
                 else:  # if just keys are the same, update value to new value
                     self.hash_map[index] = (key, value)
@@ -73,7 +76,8 @@ class HashMap:
                 # if (key, value) already exist, pass
                 if current_value[i][0] == key and current_value[i][1] == value:
                     break
-                elif current_value[i][0] == key:  # if key already exists, but new value, update (key, value)
+                # if key already exists, but new value, update (key, value)
+                elif current_value[i][0] == key:
                     self.hash_map[index][i] = (key, value)
                     break
                 else:
