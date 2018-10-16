@@ -21,13 +21,13 @@ def loadWords(numWords):
     return wordList
 
 
-def checkMapSize(map):
+def checkMapSize(test_map):
     """
     Returns: int; size of map
     """
     try:
         counter = 0
-        for line in map:
+        for line in test_map:
             if isinstance(line, list):
                 for item in line:
                     counter += 1
@@ -50,11 +50,11 @@ def testMapCreation(num):
         print(f'Failure: {err}')
 
 
-def testInsert(map, wordList):
+def testInsert(test_map, wordList):
     print('Test Map insertions from wordList...', end="")
     try:
         for word in wordList:
-            map.insert(word, word)
+            test_map.insert(word, word)
         print('Success')
 
     except Exception as err:
@@ -62,40 +62,40 @@ def testInsert(map, wordList):
 
     print("Test map size after insertions...", end="")
     try:
-        if checkMapSize(map) == len(wordList):
+        if checkMapSize(test_map) == len(wordList):
             print("Success")
     except Exception as err:
         print(f"Failure, {err}")
 
 
-def testLookup(map, wordList):
+def testLookup(test_map, wordList):
 
     print('Test Map lookups "a" to "z"...', end="")
 
     try:
         for word in wordList:
-            map.lookup(word)
+            test_map.lookup(word)
         print('Success')
     except Exception as err:
         print(f'Failure: {err}')
 
 
-def testRemove(map, wordList):
+def testRemove(test_map, wordList):
 
     print('Test Map removals "a" to "z"...', end="")
 
     try:
         for word in wordList:
-            map.remove(word)
+            test_map.remove(word)
         print('Success')
     except Exception as err:
         print(f'Failure: {err}')
 
 
-def testEmpty(map, numBuckets):
+def testEmpty(test_map, numBuckets):
     print('Map should be empty...', end="")
     try:
-        for item in map:
+        for item in test_map:
             if item is not None:
                 print("Failure, map is not empty")
                 break
@@ -106,7 +106,7 @@ def testEmpty(map, numBuckets):
 
     print("Test map size after deletions...", end="")
     try:
-        if checkMapSize(map) == numBuckets:
+        if checkMapSize(test_map) == numBuckets:
             print("Success")
     except Exception as err:
         print(f"Failure: {err}")
