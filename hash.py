@@ -8,10 +8,15 @@ class HashMap:
     """
 
     def __init__(self, map_size=17):
+        self.map_size = map_size
         self.hash_map = self.create_map(map_size)
-        self.map_size = len(self.hash_map)
 
     def create_map(self, map_size):
+        """
+        Creates list "map" of given map_size
+        arguments: map_size
+        returns: list
+        """
         map = []
         for i in range(map_size):
             map.append(None)
@@ -42,6 +47,13 @@ class HashMap:
         return self.hash(key) % self.map_size
 
     def insert(self, key, value):
+        """
+        For given (key, value), inserts (key, value) tuple into map.
+        If no item exists, (key, value) replaces None
+        If a collision occurs, creates list of tuples and appends list
+        as needed
+        returns: None
+        """
         index = self.get_index(key)
         current_value = self.hash_map[index]
 
