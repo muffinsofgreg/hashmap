@@ -119,7 +119,7 @@ def check_all():
             numWords = int(input('How many words to load from wordList?: '))
             break
         except Exception as err:
-            print("Please enter a valid integer.")
+            print(f"Please enter a valid integer: {err}")
 
     wordList = loadWords(numWords)
 
