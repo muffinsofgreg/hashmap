@@ -6,18 +6,20 @@ class PlotMap:
     """Generates a visual chart, plotting the hash indexes on the control axis
        and the number of hashed items on the dependent axis
     """
-    
+
     def __init__(self, map):
         self.map = map
-        
+
     def visualize(self, map):
-        
+
         plt.figure('Visual Map')
+
         plt.clf()
-        
+
         n, bins, patches = plt.hist(len(map), [item for item in map])
-        
+
         plt.show()
+
 
 class Prime_Generator:
     """Generates a series of prime numbers up to N"""

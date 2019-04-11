@@ -1,4 +1,4 @@
-from hash import HashMap
+from hash_map import HashMap
 
 WORDLIST_FILENAME = "words.txt"
 
