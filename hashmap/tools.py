@@ -22,7 +22,8 @@ class PlotMap:
 
 
 class Prime_Generator:
-    """Generates a series of prime numbers up to N"""
+    """Generates a series of prime numbers up to N. Has random choice
+        method if desired."""
 
     def __init__(self, n):
         self._n = n
